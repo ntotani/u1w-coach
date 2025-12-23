@@ -11,18 +11,14 @@ public class WanderingMovement : MonoBehaviour
 
     private void Start()
     {
-        // Remember the starting position as the center of the wandering area
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
         PickNewDestination();
     }
 
     private void Update()
     {
-        // Move towards the current destination
-        transform.position = Vector2.MoveTowards(transform.position, currentDestination, moveSpeed * Time.deltaTime);
-
-        // Check if we have reached the destination
-        if (Vector2.Distance(transform.position, currentDestination) < 0.1f)
+        transform.localPosition = Vector2.MoveTowards(transform.localPosition, currentDestination, moveSpeed * Time.deltaTime);
+        if (Vector2.Distance(transform.localPosition, currentDestination) < 0.1f)
         {
             PickNewDestination();
         }
@@ -30,7 +26,6 @@ public class WanderingMovement : MonoBehaviour
 
     private void PickNewDestination()
     {
-        // Pick a random point within the radius around the start position
         Vector2 randomPoint = Random.insideUnitCircle * wanderRadius;
         currentDestination = startPosition + randomPoint;
     }

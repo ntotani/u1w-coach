@@ -15,10 +15,7 @@ public class FloatingWobble : MonoBehaviour
 
     private void Update()
     {
-        // Calculate vertical offset using Sin wave
         float yOffset = Mathf.Sin(Time.time * frequency) * amplitude;
-        
-        // Apply offset to the start position
         transform.localPosition = startPos + Vector3.up * yOffset;
     }
 }

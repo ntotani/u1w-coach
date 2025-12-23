@@ -30,15 +30,9 @@ public class FollowTarget : MonoBehaviour
     private void Update()
     {
         if (target == null) return;
-
-        // Record target's current position and time
         pointsInTime.Enqueue(new PointInTime(target.position, Time.time));
-
-        // Check if the oldest record is older than the delay time
-        // We loop to catch up if multiple frames' worth of time has passed
         while (pointsInTime.Count > 0 && Time.time - pointsInTime.Peek().time >= delaySeconds)
         {
-            // Move to the position recorded 'delaySeconds' ago
             PointInTime point = pointsInTime.Dequeue();
             transform.position = point.position + offset;
         }
